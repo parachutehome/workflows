@@ -8,7 +8,7 @@ on:
         required: false
         type: string
       eslint:
-        description: 'Should the `npm run lint:es task be run?'
+        description: 'Should the `npm run lint:es` task be run?'
         required: false
         type: boolean
         default: true
