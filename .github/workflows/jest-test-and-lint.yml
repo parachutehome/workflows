@@ -25,5 +25,9 @@ jobs:
       uses: actions/checkout@v2
     - name: Prepare npm
       uses: ./.github/actions/prepare-npm
+    - id: has-linting
+      run: |
+        content=`jq if .scripts."lint:es" != null then true else false end`
     - name: Run linting
+      if: ${{ steps.package_json }}
       run: npm run lint:es
