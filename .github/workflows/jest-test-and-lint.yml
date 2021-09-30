@@ -23,11 +23,12 @@ jobs:
     steps:
     - name: Checkout Branch
       uses: actions/checkout@v2
+    - id: has-linting
+      run: echo "HAS_ES_LINT=${jq '.scripts.\"lint:es\" != null'}"
+    - name: Test
+      run: echo $HAS_ES_LINT
     - name: Prepare npm
       uses: ./.github/actions/prepare-npm
-    - id: has-linting
-      run: |
-        content=`jq 'if .scripts."lint:ess" != null then true else false end'`
     - name: Run linting
       if: ${{ steps.package_json }}
       run: npm run lint:es
