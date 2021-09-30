@@ -5,7 +5,7 @@ runs:
   steps:
     - name: Configure Package Registry Authentication
       shell: bash
-      if: ${{ inputs.github-registry }}
+      if: inputs.github-registry
       run: |
         echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PAT }}" > .npmrc
         echo '${{ inputs.github-registry }}=https://npm.pkg.github.com' >> .npmrc
