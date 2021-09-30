@@ -24,7 +24,9 @@ jobs:
     - name: Checkout Branch
       uses: actions/checkout@v2
     - id: has-linting
-      run: echo "HAS_ES_LINT=${jq '.scripts.\"lint:es\" != null'}"
+      run: |
+        HAS_ES_LINT=echo jq '.scripts."lint:es" != null'
+        $HAS_ES_LINT >> $HAS_ES_LINT
     - name: Test
       run: echo $HAS_ES_LINT
     - name: Prepare npm
