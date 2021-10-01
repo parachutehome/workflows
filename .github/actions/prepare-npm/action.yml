@@ -4,7 +4,7 @@ inputs:
   npm_token:
     description: "Private npm registry token."
     required: true
-    default: secrets.GH_ACTIONS_PAT
+    default: ${{ secrets.GH_ACTIONS_PAT }}
 
 runs:
   using: "composite"
