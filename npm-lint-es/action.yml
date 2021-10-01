@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Run Tests
       shell: bash
-      run: npm test
+      run: npm run lint:es

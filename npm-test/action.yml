@@ -6,4 +6,4 @@ runs:
   steps:
     - name: Run ESLint
       shell: bash
-      run: npm run lint:es
+      run: npm test
