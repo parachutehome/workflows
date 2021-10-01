@@ -3,10 +3,6 @@ name: Shareable test and lint workflow
 on:
   workflow_call:
     inputs:
-      github-registry:
-        description: 'Adds private github npm registry if set.'
-        required: false
-        type: string
       eslint:
         description: 'Should the `npm run lint:es` task be run?'
         required: false
