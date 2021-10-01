@@ -4,7 +4,6 @@ inputs:
   npm_token:
     description: "Private npm registry token."
     required: true
-    default: ${{ secrets.GH_ACTIONS_PAT }}
 
 runs:
   using: "composite"
@@ -14,17 +13,17 @@ runs:
       run: |
         echo "//npm.pkg.github.com/:_authToken=${{ inputs.npm_token }}" > .npmrc
         echo "@parachutehome:registry=https://npm.pkg.github.com" >> .npmrc
-    - name: Cache npm cache
-      uses: actions/cache@v2
-      env:
-        cache-name: npm-cache
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-${{ github.repository }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-${{ github.repository }}-test-${{ env.cache-name }}-
-          ${{ runner.os }}-${{ github.repository }}-test-
-          ${{ runner.os }}-${{ github.repository }}-
+    # - name: Cache npm cache
+    #   uses: actions/cache@v2
+    #   env:
+    #     cache-name: npm-cache
+    #   with:
+    #     path: ~/.npm
+    #     key: ${{ runner.os }}-${{ github.repository }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-${{ github.repository }}-test-${{ env.cache-name }}-
+    #       ${{ runner.os }}-${{ github.repository }}-test-
+    #       ${{ runner.os }}-${{ github.repository }}-
     - name: Install modules
       shell: bash
       run: npm ci
