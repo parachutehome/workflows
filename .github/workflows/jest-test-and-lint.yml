@@ -8,6 +8,10 @@ on:
         required: false
         type: boolean
         default: true
+    secrets:
+      github_npm_token:
+        description: 'Github npm registry token'
+        required: false
 
 jobs:
   jest:
@@ -15,14 +19,10 @@ jobs:
     steps:
     - name: Checkout Branch
       uses: actions/checkout@v2
-    - name: Test
-      shell: bash
-      run: echo ${{ secrets.TEST }}
     - name: Prepare npm
       uses: parachutehome/workflows/.github/actions/npm-prepare@trunk
       with:
-        npm_token: ${{ secrets.GH_ACTIONS_PAT }}
-        test: ${{ secrets.TEST }}
+        github_npm_token: ${{ inputs.github_npm_token }}
     - name: Run tests
       run: npm test
   lint:
@@ -34,7 +34,6 @@ jobs:
     - name: Prepare npm
       uses: parachutehome/workflows/.github/actions/npm-prepare@trunk
       with:
-        npm_token: ${{ secrets.GH_ACTIONS_PAT }}
-        test: ${{ secrets.TEST }}
+        github_npm_token: ${{ secrets.github_npm_token }}
     - name: Run linting
       run: npm run lint:es
