@@ -21,7 +21,9 @@ jobs:
         pwd
         ls
     - name: Prepare npm
-      uses: ./.github/actions/npm-prepare@trunk
+      uses: parachutehome/workflows/.github/actions/npm-prepare@trunk
+      with:
+        npm_token: ${{ secrets.GH_ACTIONS_PAT }}
     - name: Run tests
       run: npm test
   lint:
@@ -31,6 +33,8 @@ jobs:
     - name: Checkout Branch
       uses: actions/checkout@v2
     - name: Prepare npm
-      uses: ./.github/actions/npm-prepare@trunk
+      uses: parachutehome/workflows/.github/actions/npm-prepare@trunk
+      with:
+        npm_token: ${{ secrets.GH_ACTIONS_PAT }}
     - name: Run linting
       run: npm run lint:es
