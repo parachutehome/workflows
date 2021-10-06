@@ -1,9 +1,0 @@
-name: "npm lint:es"
-description: "Run eslint specified by npm"
-
-runs:
-  using: "composite"
-  steps:
-    - name: Run ESLint
-      shell: bash
-      run: npm test

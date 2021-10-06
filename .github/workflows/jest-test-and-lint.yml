@@ -15,6 +15,11 @@ jobs:
     steps:
     - name: Checkout Branch
       uses: actions/checkout@v2
+    - name: Test
+      shell: bash
+      run: |
+        pwd
+        ls
     - name: Prepare npm
       uses: ./.github/actions/npm-prepare
     - name: Run tests

@@ -1,9 +1,0 @@
-name: "npm test"
-description: "Run tests specified by npm"
-
-runs:
-  using: "composite"
-  steps:
-    - name: Run Tests
-      shell: bash
-      run: npm run lint:es
