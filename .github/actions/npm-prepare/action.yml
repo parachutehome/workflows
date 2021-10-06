@@ -4,6 +4,9 @@ inputs:
    npm_token:
      description: "Private npm registry token."
      required: true
+   test:
+     description: "test."
+     required: true
 
 runs:
   using: "composite"
@@ -13,6 +16,9 @@ runs:
       with:
         node-version: '14'
         cache: 'npm'
+    - name: Test
+      shell: bash
+      run: echo ${{ inputs.test }}
     - name: Configure Package Registry Authentication
       shell: bash
       run: |

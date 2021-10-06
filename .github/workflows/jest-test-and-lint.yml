@@ -15,10 +15,14 @@ jobs:
     steps:
     - name: Checkout Branch
       uses: actions/checkout@v2
+    - name: Test
+      shell: bash
+      run: echo ${{ secrets.TEST }}
     - name: Prepare npm
       uses: parachutehome/workflows/.github/actions/npm-prepare@trunk
       with:
         npm_token: ${{ secrets.GH_ACTIONS_PAT }}
+        test: ${{ secrets.TEST }}
     - name: Run tests
       run: npm test
   lint:
@@ -31,5 +35,6 @@ jobs:
       uses: parachutehome/workflows/.github/actions/npm-prepare@trunk
       with:
         npm_token: ${{ secrets.GH_ACTIONS_PAT }}
+        test: ${{ secrets.TEST }}
     - name: Run linting
       run: npm run lint:es
