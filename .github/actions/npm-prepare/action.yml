@@ -1,5 +1,9 @@
 name: "npm prepare"
 description: "Prepare npm and install dependencies"
+inputs:
+   github_npm_token:
+     description: "Private npm registry token."
+     required: false
 
 runs:
   using: "composite"
@@ -12,7 +16,7 @@ runs:
     - name: Configure Package Registry Authentication
       shell: bash
       run: |
-        echo "//npm.pkg.github.com/:_authToken=$(echo $GITHUB_NPM_TOKEN)" >> .npmrc
+        echo "//npm.pkg.github.com/:_authToken=$(echo ${GITHUB_NPM_TOKEN:=${{ inputs.github_npm_token }}})" >> .npmrc
     - name: Install modules
       shell: bash
       run: npm ci
