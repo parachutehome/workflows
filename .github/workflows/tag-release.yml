@@ -1,0 +1,25 @@
+name: Shareable workflow to tag releases
+
+on:
+  workflow_call:
+    secrets:
+      github_npm_token:
+        description: 'Github npm registry token'
+        required: true
+      github_token:
+        description: 'Github token'
+        required: true
+
+jobs:
+  tagRelease:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.github_token }}
+      GITHUB_NPM_TOKEN: ${{ secrets.github_npm_token }}
+    steps:
+    - name: Checkout Branch
+      uses: actions/checkout@v2
+    - name: Prepare npm
+      uses: parachutehome/workflows/.github/actions/npm-prepare@v1
+    - name: Tag Release
+      run: npm run release
