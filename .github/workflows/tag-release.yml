@@ -19,6 +19,8 @@ jobs:
     steps:
     - name: Checkout Branch
       uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.github_repo_token }}
     - name: Prepare npm
       uses: parachutehome/workflows/.github/actions/npm-prepare@v1
     - name: Tag Release
