@@ -13,6 +13,17 @@ runs:
       shell: bash
       run: |
         echo "//npm.pkg.github.com/:_authToken=${GITHUB_NPM_TOKEN}" >> .npmrc
+    - name: Cache npm cache
+      uses: actions/cache@v2
+      env:
+        cache-name: npm-cache
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-${{ github.repository }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ github.repository }}-test-${{ env.cache-name }}-
+          ${{ runner.os }}-${{ github.repository }}-test-
+          ${{ runner.os }}-${{ github.repository }}-
     - name: Install modules
       shell: bash
       run: npm ci
