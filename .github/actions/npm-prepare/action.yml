@@ -19,10 +19,9 @@ runs:
         cache-name: npm-cache
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-${{ github.repository }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-${{ github.repository }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-${{ github.repository }}-test-${{ env.cache-name }}-
-          ${{ runner.os }}-${{ github.repository }}-test-
+          ${{ runner.os }}-${{ github.repository }}-${{ env.cache-name }}-
           ${{ runner.os }}-${{ github.repository }}-
     - name: Install modules
       shell: bash
