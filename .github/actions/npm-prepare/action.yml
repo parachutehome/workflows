@@ -6,6 +6,8 @@ runs:
   steps:
     - name: Setup Node
       uses: volta-cli/action@v4
+      with:
+        volta-version: 1.0.8
     - name: Ignore .npmrc
       shell: bash
       run: git update-index --skip-worktree -- .npmrc

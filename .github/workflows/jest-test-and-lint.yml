@@ -22,7 +22,7 @@ jobs:
     - name: Checkout Branch
       uses: actions/checkout@v2
     - name: Prepare npm
-      uses: parachutehome/workflows/.github/actions/npm-prepare@main
+      uses: parachutehome/workflows/.github/actions/npm-prepare@fix-volta
     - name: Run tests
       run: npm test
   lint:
@@ -34,6 +34,6 @@ jobs:
     - name: Checkout Branch
       uses: actions/checkout@v2
     - name: Prepare npm
-      uses: parachutehome/workflows/.github/actions/npm-prepare@main
+      uses: parachutehome/workflows/.github/actions/npm-prepare@fix-volta
     - name: Run linting
       run: npm run lint:es
