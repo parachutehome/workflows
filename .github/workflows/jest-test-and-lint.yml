@@ -3,37 +3,58 @@ name: Shareable test and lint workflow
 on:
   workflow_call:
     inputs:
-      eslint:
-        description: 'Should the `npm run lint:es` task be run?'
+      run_eslint_only:
+        description: "Should we run only `npm run lint:es` or run `npm run lint`"
         required: false
         type: boolean
         default: true
+      run_test:
+        description: "Should the `npm test` task be run?"
+        type: boolean
+        default: true
+        required: false
     secrets:
       github_npm_token:
-        description: 'Github npm registry token'
-        required: false
+        description: "Github npm registry token"
+        required: true
 
 jobs:
-  jest:
+  test:
+    name: "Job: `npm test`"
+    if: inputs.run_test
     runs-on: ubuntu-latest
     env:
       GITHUB_NPM_TOKEN: ${{ secrets.github_npm_token }}
     steps:
-    - name: Checkout Branch
-      uses: actions/checkout@v2
-    - name: Prepare npm
-      uses: parachutehome/workflows/.github/actions/npm-prepare@main
-    - name: Run tests
-      run: npm test
-  lint:
-    if: inputs.eslint
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+      - name: Prepare npm
+        uses: parachutehome/workflows/.github/actions/npm-prepare@main
+      - name: Run tests
+        run: npm test
+  eslint:
+    name: "Job: `npm run lint:es`"
+    if: inputs.run_eslint_only
     runs-on: ubuntu-latest
     env:
       GITHUB_NPM_TOKEN: ${{ secrets.github_npm_token }}
     steps:
-    - name: Checkout Branch
-      uses: actions/checkout@v2
-    - name: Prepare npm
-      uses: parachutehome/workflows/.github/actions/npm-prepare@main
-    - name: Run linting
-      run: npm run lint:es
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+      - name: Prepare npm
+        uses: parachutehome/workflows/.github/actions/npm-prepare@main
+      - name: Run linting
+        run: npm run lint:es
+  main_lint:
+    name: "Job: `npm run lint`"
+    if: ${{ inputs.run_eslint_only == false }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_NPM_TOKEN: ${{ secrets.github_npm_token }}
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+      - name: Prepare npm
+        uses: parachutehome/workflows/.github/actions/npm-prepare@main
+      - name: Run linting
+        run: npm run lint
