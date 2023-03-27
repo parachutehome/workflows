@@ -13,6 +13,23 @@ jobs:
       github_npm_token: ${{ secrets.GH_NPM_TOKEN }}
 ```
 
+## Verify Unimported Files
+
+```
+name: Unimported
+on:
+    pull_request:
+        branches: [main]
+        paths-ignore:
+            - '.github'
+
+jobs:
+    do:
+        uses: parachutehome/workflows/.github/workflows/unimported.yml@v1
+        secrets:
+            github_npm_token: ${{ secrets.GH_ACTIONS_PAT }}
+```
+
 ## Tag Release
 
 ```
