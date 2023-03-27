@@ -18,4 +18,4 @@ jobs:
     - name: Prepare npm
       uses: parachutehome/workflows/.github/actions/npm-prepare@v1
     - name: Run unimported
-      run: npm unimported
+      run: npm run unimported
