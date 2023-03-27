@@ -15,6 +15,8 @@ jobs:
 
 ## Verify Unimported Files
 
+Add a `npm run unimported` script to your `package.json` that executes [unimported](https://www.npmjs.com/package/unimported).
+
 ```
 name: Unimported
 on:
