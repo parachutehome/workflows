@@ -1,0 +1,21 @@
+name: Shareable unimported workflow
+
+on:
+  workflow_call:
+    secrets:
+      github_npm_token:
+        description: 'Github npm registry token'
+        required: false
+
+jobs:
+  unimported:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_NPM_TOKEN: ${{ secrets.github_npm_token }}
+    steps:
+    - name: Checkout Branch
+      uses: actions/checkout@v2
+    - name: Prepare npm
+      uses: parachutehome/workflows/.github/actions/npm-prepare@main
+    - name: Run unimported
+      run: npm unimported
